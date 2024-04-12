@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -17,7 +16,6 @@ import entity.TaiSmile;
 import enviroment.EnviromentManager;
 import enviroment.Lighting;
 import objects.FlashLight;
-import objects.SuperObject;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -36,8 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 	//WORLD SETTING
-	public final int maxWorldCol = 50;
-	public final int maxWorldRow = 50;
+	public final int maxWorldCol = 82;
+	public final int maxWorldRow = 83;
 
 	//FPS
 	final int fps = 60;

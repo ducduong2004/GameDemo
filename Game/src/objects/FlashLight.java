@@ -9,10 +9,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import entity.Entity;
 import main.GamePanel;
 import main.UtilityTool;
 
-public class FlashLight extends SuperObject {
+public class FlashLight extends Entity {
 	
 	int cursorX;
 	int cursorY;
@@ -22,7 +23,7 @@ public class FlashLight extends SuperObject {
 	BufferedImage image;
 	
 	public FlashLight(GamePanel gp) {
-		
+		super(gp);
 		UtilityTool uTool = new UtilityTool();
 
 		this.gp = gp;
@@ -60,11 +61,8 @@ public class FlashLight extends SuperObject {
 //		
 //		System.out.println(Math.atan2(yDistance, xDistance));
 
-		
-		
 		//calculate the angle
 		double rotationAngle = Math.toDegrees(Math.atan2(yDistance, xDistance));
-		
 		double rotationRequired = Math.toRadians(rotationAngle);
 		double locationX = image.getWidth() / 2;
 		double locationY = image.getHeight() / 2;

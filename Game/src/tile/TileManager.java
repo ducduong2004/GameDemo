@@ -19,7 +19,7 @@ public class TileManager {
 
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		tile = new Tile[10];
+		tile = new Tile[30];
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		getTileImage();
 		loadMap("/maps/map01.txt");
@@ -31,8 +31,27 @@ public class TileManager {
 			setup(0, "hard-floor-1", false);
 			setup(1, "hard-floor-2", false);
 			setup(2, "hard-floor-3", false);
-			setup(3, "hard-floor-4", true);
-			setup(4, "bin", false);
+			setup(3, "hard-floor-4", false);
+			setup(4, "hard-floor-5", false);
+			setup(5, "hard-floor-6", false);
+			setup(6, "hard-floor-7", false);
+			setup(7, "hard-floor-8", false);
+			setup(8, "wall-1", true);
+			setup(9, "wall-2", true);
+			setup(10, "boundaries-top", true);
+			setup(11, "boundaries-right", true);
+			setup(12, "boundaries-bot", true);
+			setup(13, "boundaries-left", true);
+			setup(14, "boundaries-top-solid", true);
+			setup(15, "boundaries-right-solid", true);
+			setup(16, "boundaries-bot-solid", true);
+			setup(17, "boundaries-left-solid", true);
+			setup(18, "boundaries-corner-3", true);
+			setup(19, "boundaries-corner-4", true);
+			setup(20, "boundaries-corner-1", true);
+			setup(21, "boundaries-corner-2", true);
+
+			
 	}
 	
 	public void setup(int index, String imagePath, boolean collision)	{

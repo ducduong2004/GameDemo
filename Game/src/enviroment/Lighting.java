@@ -65,7 +65,7 @@ public class Lighting extends EnviromentManager {
 			
 			g2.fill(lightArea);
 			
-	        g2.setColor(new Color(0, 0, 0,0.0f));
+	        g2.setColor(new Color(0, 0, 0,0.8f));
 			g2.fill(screenArea);
 			
 			g2.dispose();
