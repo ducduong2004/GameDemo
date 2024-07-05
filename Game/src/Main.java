@@ -23,7 +23,7 @@ public class Main {
 		window.setPreferredSize(new Dimension(1920 / 2, 1080 / 2));
 
 		// turn this on if you want full screen game
-		// window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		window.setResizable(false);
 		window.setLayout(new FlowLayout());

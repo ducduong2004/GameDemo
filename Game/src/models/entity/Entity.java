@@ -24,10 +24,10 @@ public class Entity {
 
 	// for animation
 	protected int frameWidth = 32; // Width of each frame in the sprite sheet
-	BufferedImage indieImage; // Sprite Image for Entity
-	BufferedImage indieImageMirror; // Sprite Image for Entity but being mirror
-	protected BufferedImage[] frames; // Array to store individual frames
-	protected BufferedImage[] framesMirror; // Array to store individual frames
+	BufferedImage indieImage = null; // Sprite Image for Entity
+	BufferedImage indieImageMirror = null;// Sprite Image for Entity but being mirror
+	protected BufferedImage[] frames = new BufferedImage[2]; // Array to store individual frames
+	protected BufferedImage[] framesMirror = new BufferedImage[2]; // Array to store individual frames
 	protected BufferedImage currentImage = null;
 
 	// counter and animation
@@ -39,12 +39,15 @@ public class Entity {
 	public int spriteNum = 1;
 
 	// Character Atributes
+	public int maxHealth;
 	public int health;
 	public String name;
 	public int thresholdDistance; // Range
 	public int speed;
 	public int defaultSpeed;
 	public String info = "it'll do something";
+	private boolean dead;
+
 
 	// Type
 	public int type;
@@ -52,6 +55,7 @@ public class Entity {
 	public final int type_npc = 1;
 	public final int type_monster = 2;
 	public final int type_object = 3;
+	
 
 	public Entity(Game gp2) {
 		this.gp = gp2;
@@ -116,11 +120,9 @@ public class Entity {
 
 		collisionOn = false;
 		gp.collisionChecker.checkTile(this);
-		gp.collisionChecker.checkObject(this, false);
-		// gp.collisionChecker.checkEntity(this, gp.npc);
-		gp.collisionChecker.checkEntity(this, gp.monster);
-		// gp.collisionChecker.checkEntity(this,gp.iTile);
 		boolean contactPlayer = gp.collisionChecker.checkPlayer(this);
+
+
 		if (contactPlayer == true) {
 			this.conTactPlayer();
 		}
@@ -132,8 +134,13 @@ public class Entity {
 
 	public void update() {
 
+		if (dead) {
+			return;
+		}
+
 		setAction();
 		checkCollision();
+		checkIsDead();
 
 		if (!collisionOn) {
 			switch (direction) {
@@ -167,6 +174,12 @@ public class Entity {
 
 	}
 
+	private void checkIsDead() {
+		if (health < 0) {
+			dead = true;
+		}
+	}
+
 	public boolean inCamera() {
 		boolean inCamera = false;
 		if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && 
@@ -193,22 +206,20 @@ public class Entity {
 		}
 
 		try {
-			indieImage = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
-			indieImageMirror = ImageIO.read(getClass().getResourceAsStream(imagePath + "-mirror.png"));
+
+			indieImageMirror = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
+			indieImage = ImageIO.read(getClass().getResourceAsStream(imagePath + "_mirror.png"));
+
+			if (type != type_object) {
+				indieImage = uTool.scaleImage(indieImage, gp.tileSize, gp.tileSize);
+				indieImageMirror = uTool.scaleImage(indieImageMirror, gp.tileSize, gp.tileSize);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		totalFrames = frameNum;
-		frames = new BufferedImage[totalFrames];
-		framesMirror = new BufferedImage[totalFrames];
-		for (int i = 0; i < totalFrames; i++) {
-			frames[i] = indieImage.getSubimage(i * frameWidth, 0, frameWidth, indieImage.getHeight());
-			frames[i] = uTool.scaleImage(frames[i], gp.tileSize * scaleNum, gp.tileSize * scaleNum);
-			framesMirror[i] = indieImage.getSubimage(i * frameWidth, 0, frameWidth, indieImage.getHeight());
-			framesMirror[i] = uTool.scaleImage(framesMirror[i], gp.tileSize * scaleNum, gp.tileSize * scaleNum);
-		}
-
+		frames[frameNum] = indieImage;
+		framesMirror[frameNum] = indieImageMirror;
 	}
 
 	// draw method
@@ -221,7 +232,7 @@ public class Entity {
 		if (inCamera()) {
 			if (noMirror) {
 				g2.drawImage(currentImage, screenX, screenY, null);
-				g2.drawRect(screenX + solidArea.x, screenY + solidArea.x, 64, 64);
+				//g2.drawRect(screenX + solidArea.x, screenY + solidArea.x, 64, 64);
 				return;
 			}
 
@@ -239,9 +250,8 @@ public class Entity {
 				currentImage = frames[currentFrame];
 				break;
 			}
-			animate();
 			g2.drawImage(currentImage, screenX, screenY, null);
-			// g2.drawRect(screenX + solidArea.x, screenY + solidArea.x, 64, 64);
+			//g2.drawRect(screenX + solidArea.x, screenY + solidArea.x, 64, 64);
 		}
 
 	}
@@ -257,29 +267,22 @@ public class Entity {
 		this.worldY = worldY;
 	}
 
-	// delay to animate
-	protected void animate() {
-		// Increment frame delay counter
-		frameDelayCounter++;
-		// Check if it's time to update the frame
-		if (frameDelayCounter >= frameDelay) {
-			// Reset frame delay counter
-			frameDelayCounter = 0;
-			// Increment frame counter
-			currentFrame++;
-			// Wrap around to the beginning if reached the end
-			if (currentFrame >= totalFrames) {
-				currentFrame = 0;
-			}
-		}
-	}
-
 	public boolean isUsable() {
 		return usable;
 	}
 
 	public void setUsable(boolean usable) {
 		this.usable = usable;
+	}
+
+	protected void startCooldownTimer(int milliseconds) {
+		new Thread(() -> {
+			try {
+				Thread.sleep(milliseconds); // Cooldown period (in milliseconds)
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}).start();
 	}
 
 }

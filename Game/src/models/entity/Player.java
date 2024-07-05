@@ -1,6 +1,9 @@
 package models.entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -27,11 +30,17 @@ public abstract class Player extends Entity {
 	public Entity[] inventory = new Entity[4];
 	public int slot = 0;
 	public Entity onHand = null;
+
+	public boolean invincible = false;
+	public int invincibleCounter = 0;
 	
 
 	public Player(Game game, KeyHandler keyH) {
 		super(game);
 		this.keyH = keyH;
+
+		maxHealth = 10;
+		health = maxHealth;
 
 		type = 0;
 		name = "Player";
@@ -92,6 +101,10 @@ public abstract class Player extends Entity {
 
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.collisionChecker.checkObject(this, true);
+
+		// CHECK MONSTER COLLISION
+		int monsterIndex = gp.collisionChecker.checkEntity(this, gp.monster);
+		contactMonster(monsterIndex);
 
 		if (keyH.interaction) {
 //			System.out.println("Key interaction detected"); // Debugging statement
@@ -157,7 +170,27 @@ public abstract class Player extends Entity {
 
 		}
 
+		if (invincible == true) {
+			invincibleCounter++;
+			if (invincibleCounter > 60) {
+				invincible = false;
+				invincibleCounter = 0;
+			}
+		}
+
 	}
+
+	public void contactMonster(int monsterIndex) {
+		if (monsterIndex != -1) {
+
+			if (invincible == false) {
+				health -= 1;
+				invincible = true;
+			}
+
+		}
+	}
+
 
 	private boolean usingitem() {
 		return usingItem;
@@ -234,7 +267,7 @@ public abstract class Player extends Entity {
 
 	}
 
-	public void draw(Graphics g2) {
+	public void draw(Graphics2D g2) {
 
 		switch (direction) {
 		case "down":
@@ -278,10 +311,16 @@ public abstract class Player extends Entity {
 				currentImage = left2;
 			break;
 		}
+		
+		}
+
+		if (invincible == true) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 		}
 
 		g2.drawImage(currentImage, screenX, screenY, null);
-		g2.drawRect(screenX, screenY, 64, 64);
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		//g2.drawRect(screenX, screenY, 64, 64);
 
 	}
 

@@ -116,7 +116,8 @@ public class CollisionChecker {
 
 		int index = -1;
 
-		for (Entity target : entityList) {
+		for (int i = 0; i < gp.monster.length; i++) {
+			Entity target = gp.monster[i];
 			if (target != null) {
 				// get entity's solidArea position
 				// set collision always update by plusing it ( dumb method )
@@ -130,7 +131,7 @@ public class CollisionChecker {
 				if (entity1.solidArea.intersects(target.solidArea) && !entity1.equals(target)) {
 					entity1.collisionOn = true;
 
-					index = target.type;
+					index = i;
 				}
 				entity1.solidArea.x = entity1.solidAreaDefaultX;
 				entity1.solidArea.y = entity1.solidAreaDefaultY;
