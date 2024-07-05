@@ -1,4 +1,6 @@
-package models.entity;
+package models.entity.skill;
+
+import models.entity.player.Player;
 
 public class LightFootSkillBehavior implements SkillBehavior {
 

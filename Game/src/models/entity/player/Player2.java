@@ -1,7 +1,8 @@
-package models.entity;
+package models.entity.player;
 
 import controller.input.KeyHandler;
 import models.Game;
+import models.entity.skill.LightFootSkillBehavior;
 
 public class Player2 extends Player {
 

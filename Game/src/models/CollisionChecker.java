@@ -1,7 +1,7 @@
 package models;
 
 import models.entity.Entity;
-import models.entity.Player;
+import models.entity.player.Player;
 
 public class CollisionChecker {
 	Game gp;

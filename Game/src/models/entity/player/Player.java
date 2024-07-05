@@ -1,4 +1,4 @@
-package models.entity;
+package models.entity.player;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
@@ -11,7 +11,9 @@ import javax.imageio.ImageIO;
 
 import controller.input.KeyHandler;
 import models.Game;
+import models.entity.Entity;
 import models.entity.object.OBJ_Bottle;
+import models.entity.skill.SkillBehavior;
 import models.sound.Sound;
 import utils.UtilityTool;
 

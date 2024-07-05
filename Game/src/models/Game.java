@@ -6,9 +6,9 @@ import java.util.List;
 
 import controller.input.KeyHandler;
 import models.entity.Entity;
-import models.entity.Player;
-import models.entity.Player1;
-import models.entity.SimpleCharacterFactory;
+import models.entity.player.Player;
+import models.entity.player.Player1;
+import models.entity.player.SimpleCharacterFactory;
 import models.sound.Sound;
 import models.tile.TileManager;
 import views.UI;
