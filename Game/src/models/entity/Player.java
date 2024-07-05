@@ -22,10 +22,12 @@ public abstract class Player extends Entity {
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
 	boolean canInteract = true;
+	public boolean usingItem = false;
 
 	public Entity[] inventory = new Entity[4];
 	public int slot = 0;
 	public Entity onHand = null;
+	
 
 	public Player(Game game, KeyHandler keyH) {
 		super(game);
@@ -113,8 +115,11 @@ public abstract class Player extends Entity {
 		}
 
 		// keep Item on playerr position
-
-		holdingItem(inventory[slot]);
+		if(!usingitem()) {
+			holdingItem(inventory[slot]);
+		}
+			
+		
 
 		// MOVEMENT
 		if (keyH.leftPressed == true || keyH.rightPressed == true || keyH.downPressed == true
@@ -132,7 +137,7 @@ public abstract class Player extends Entity {
 				direction = "right";
 			}
 
-			// COLLISION = FALSE => CAN MOVE
+			// COLLISIONON = FALSE => CAN MOVE
 			if (!collisionOn) {
 				if (direction == "up")
 					worldY -= speed;
@@ -152,6 +157,10 @@ public abstract class Player extends Entity {
 
 		}
 
+	}
+
+	private boolean usingitem() {
+		return usingItem;
 	}
 
 	// player pick up an item
@@ -274,6 +283,10 @@ public abstract class Player extends Entity {
 		g2.drawImage(currentImage, screenX, screenY, null);
 		g2.drawRect(screenX, screenY, 64, 64);
 
+	}
+
+	public Entity getInventory(int x) {
+		return this.inventory[x];
 	}
 
 }

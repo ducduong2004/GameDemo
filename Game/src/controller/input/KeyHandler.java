@@ -3,6 +3,8 @@ package controller.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.text.html.parser.Entity;
+
 import models.Game;
 
 public class KeyHandler implements KeyListener {
@@ -150,13 +152,15 @@ public class KeyHandler implements KeyListener {
 		}
 	}
 
+	
 	public void pauseState(int code) {
 		if (code == KeyEvent.VK_SPACE) {
 			gp.gameState = gp.playState;
 		}
-
 	}
 
+
+	// MAIN TITLE SELECTION
 	private void optionState(int code) {
 		if (code == KeyEvent.VK_ESCAPE) {
 			gp.setGameState(gp.playState);
@@ -190,6 +194,7 @@ public class KeyHandler implements KeyListener {
 		}
 	}
 
+	// PLAYER MOVEMENT
 	public void playState(int code) {
 		if (code == KeyEvent.VK_W) {
 			upPressed = true;
@@ -201,6 +206,10 @@ public class KeyHandler implements KeyListener {
 			rightPressed = true;
 		} else if (code == KeyEvent.VK_E) {
 			interaction = true;
+		}
+
+		if (code == KeyEvent.VK_ENTER) {
+			enterPressed = true;
 		}
 
 		// HOT BAR SELECTION

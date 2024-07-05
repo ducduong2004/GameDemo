@@ -25,7 +25,7 @@ public class Entity {
 	// for animation
 	protected int frameWidth = 32; // Width of each frame in the sprite sheet
 	BufferedImage indieImage; // Sprite Image for Entity
-	BufferedImage indieImageMirror;// Sprite Image for Entity but being mirror
+	BufferedImage indieImageMirror; // Sprite Image for Entity but being mirror
 	protected BufferedImage[] frames; // Array to store individual frames
 	protected BufferedImage[] framesMirror; // Array to store individual frames
 	protected BufferedImage currentImage = null;
@@ -169,8 +169,7 @@ public class Entity {
 
 	public boolean inCamera() {
 		boolean inCamera = false;
-		if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && // *5 because skeleton lord disappears when
-																			// the top left corner isn't on the screen
+		if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && 
 				worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
 				&& worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
 				&& worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
@@ -222,7 +221,7 @@ public class Entity {
 		if (inCamera()) {
 			if (noMirror) {
 				g2.drawImage(currentImage, screenX, screenY, null);
-				// g2.drawRect(screenX + solidArea.x, screenY + solidArea.x, 64, 64);
+				g2.drawRect(screenX + solidArea.x, screenY + solidArea.x, 64, 64);
 				return;
 			}
 
