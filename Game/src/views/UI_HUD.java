@@ -35,6 +35,19 @@ public class UI_HUD implements UI_Template {
 
 		g2.setColor(Color.white);
 		g2.drawString(score, x, y + 32);
+
+		// DRAW HP
+
+		text = "HP : " + gp.player.health + " / " + gp.player.maxHealth;
+		x = gp.tileSize / 2;
+		y = gp.tileSize / 2;
+		g2.setColor(Color.darkGray);
+		g2.drawString(text, x + 1, gp.screenHeight - y + 1);
+
+		g2.setColor(Color.white);
+		g2.drawString(text, x, gp.screenHeight - y);
+
+		
 		// DRAW INVENTORY SLOT
 		int slotStartX = (int) (gp.screenWidth / 2 - gp.tileSize * 2.5);
 		int slotStartY = (int) (gp.screenHeight - gp.tileSize * 1.5);
