@@ -208,6 +208,10 @@ public class KeyHandler implements KeyListener {
 			interaction = true;
 		}
 
+		if (code == KeyEvent.VK_F) {
+			gp.player.skillBehavior.useSkill();
+		}
+
 		if (code == KeyEvent.VK_ENTER) {
 			enterPressed = true;
 		}

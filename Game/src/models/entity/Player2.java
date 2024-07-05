@@ -9,6 +9,8 @@ public class Player2 extends Player {
 	private final int playerType = 2;
 	private Player2(Game game, KeyHandler keyH) {
 		super(game, keyH);
+		skillBehavior = new LightFootSkillBehavior(this);
+
 	}
 	
 	public static Player getInstance(Game game, KeyHandler keyH) {

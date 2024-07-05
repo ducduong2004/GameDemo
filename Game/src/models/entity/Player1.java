@@ -7,8 +7,10 @@ public class Player1 extends Player {
 
 	private static Player1 instance ;
 	private final int playerType = 1;
+
 	private Player1(Game game, KeyHandler keyH) {
 		super(game, keyH);
+		skillBehavior = new HealingSkillBehavior(this);
 	}
 	
 	public static Player getInstance(Game game, KeyHandler keyH) {

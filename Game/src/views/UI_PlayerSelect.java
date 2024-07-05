@@ -32,10 +32,12 @@ public class UI_PlayerSelect implements UI_Template {
 
 		BufferedImage img1 = null;
 		BufferedImage img2 = null;
+		BufferedImage img3 = null;
 
 		try {
 			img1 = ImageIO.read(getClass().getResourceAsStream("/player/right1.png"));
 			img2 = ImageIO.read(getClass().getResourceAsStream("/player/right1_2.png"));
+			img3 = ImageIO.read(getClass().getResourceAsStream("/player/p1_right1.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,18 +60,23 @@ public class UI_PlayerSelect implements UI_Template {
 		g2.setColor(Color.white);
 		g2.drawString(text, x, y);
 
-		x = gp.screenWidth * 1 / 3 - (gp.tileSize * 1) / 2;
+		x = gp.screenWidth * 1 / 6 - (gp.tileSize * 1) / 2;
 		y += gp.tileSize * 1;
 		g2.drawImage(img1, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
 
-		x = gp.screenWidth * 2 / 3 - (gp.tileSize * 1) / 2;
+		x = gp.screenWidth * 3 / 6 - (gp.tileSize * 1) / 2;
 		g2.drawImage(img2, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
 
-		y += gp.tileSize * 2;
+		x = gp.screenWidth * 5 / 6 - (gp.tileSize * 1) / 2;
+		g2.drawImage(img3, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
 
+		y += gp.tileSize * 2;
+		g2.drawString("3", x, y);
+
+		x = gp.screenWidth * 3 / 6 - (gp.tileSize * 1) / 2;
 		g2.drawString("2", x, y);
 
-		x = gp.screenWidth * 1 / 3 - (gp.tileSize * 1) / 2;
+		x = gp.screenWidth * 1 / 6 - (gp.tileSize * 1) / 2;
 		g2.drawString("1", x, y);
 
 	}

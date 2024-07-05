@@ -5,7 +5,7 @@ import models.Game;
 
 public class Player3 extends Player {
 	private static Player3 instance;
-	private final int playerType = 1;
+	private final int playerType = 3;
 
 	private Player3(Game game, KeyHandler keyH) {
 		super(game, keyH);

@@ -17,6 +17,8 @@ import utils.UtilityTool;
 
 public abstract class Player extends Entity {
 
+	public SkillBehavior skillBehavior;
+
 	public BufferedImage left1, left2, right1, right2;
 	KeyHandler keyH;
 //	public Entity mainHand = null;
@@ -326,6 +328,10 @@ public abstract class Player extends Entity {
 
 	public Entity getInventory(int x) {
 		return this.inventory[x];
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 
 }
