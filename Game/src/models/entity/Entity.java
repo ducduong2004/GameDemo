@@ -46,7 +46,7 @@ public class Entity {
 	public int speed;
 	public int defaultSpeed;
 	public String info = "it'll do something";
-	private boolean dead;
+	protected boolean dead = false;
 
 
 	// Type
@@ -133,11 +133,7 @@ public class Entity {
 	};
 
 	public void update() {
-
-		if (dead) {
-			return;
-		}
-
+		
 		setAction();
 		checkCollision();
 		checkIsDead();
@@ -174,8 +170,8 @@ public class Entity {
 
 	}
 
-	private void checkIsDead() {
-		if (health < 0) {
+	protected void checkIsDead() {
+		if (health <= 0) {
 			dead = true;
 		}
 	}

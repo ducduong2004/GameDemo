@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import controller.input.KeyHandler;
+import event.KeyHandler;
 import models.Game;
 import models.entity.Entity;
 import models.entity.object.OBJ_Bottle;
@@ -72,7 +72,7 @@ public abstract class Player extends Entity {
 		// Default Starting Positions
 		worldX = gp.tileSize * 5;
 		worldY = gp.tileSize * 5;
-
+		dead = false;
 		health = 10;
 		thresholdDistance = 100;
 		defaultSpeed = 6;
@@ -99,6 +99,11 @@ public abstract class Player extends Entity {
 	}
 
 	public void update() {
+		if(dead) gp.setGameState(gp.lostState);
+
+		// CHECK PLAYER STATUS
+		checkIsDead();
+
 		// CHECK TILE COLLISION
 		collisionOn = false;
 		gp.collisionChecker.checkTile(this);
@@ -186,7 +191,6 @@ public abstract class Player extends Entity {
 
 	public void contactMonster(int monsterIndex) {
 		if (monsterIndex != -1) {
-
 			if (invincible == false) {
 				health -= 1;
 				invincible = true;
@@ -195,6 +199,7 @@ public abstract class Player extends Entity {
 		}
 	}
 
+	
 
 	private boolean usingitem() {
 		return usingItem;
@@ -335,5 +340,7 @@ public abstract class Player extends Entity {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
+
+	
 
 }

@@ -4,7 +4,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.input.KeyHandler;
+import event.CollisionChecker;
+import event.KeyHandler;
 import models.entity.Entity;
 import models.entity.player.Player;
 import models.entity.player.Player1;
@@ -14,6 +15,7 @@ import models.tile.TileManager;
 import views.UI;
 import views.UI_HUD;
 import views.UI_ItemInfo;
+import views.UI_Lost;
 import views.UI_OptionState;
 import views.UI_PlayState;
 import views.UI_PlayerSelect;
@@ -55,6 +57,7 @@ public class Game {
 	public final int winTitleState = 3;
 	public final int playerSelectState = 4;
 	public final int optionState = 5;
+	public final int lostState = 6;
 
 	// SYSTEM
 	public UI_Template ui_Template;
@@ -65,6 +68,7 @@ public class Game {
 	public UI_PlayState ui_PlayState;
 	public UI_HUD ui_HUD;
 	public UI_OptionState ui_OptionState;
+	public UI_Lost ui_Lost;
 
 	public KeyHandler keyH;
 	public Player player;
@@ -87,8 +91,6 @@ public class Game {
 	public final int playerType_02 = 2;
 	public final int playerType_03 = 3;
 
-	public boolean isFullScreen;
-
 	public Game() {
 		observers = new ArrayList<>();
 		ui = new UI(this);
@@ -98,6 +100,7 @@ public class Game {
 		ui_PlayerSelect = new UI_PlayerSelect(this);
 		ui_HUD = new UI_HUD(this);
 		ui_OptionState = new UI_OptionState(this);
+		ui_Lost = new UI_Lost(this);
 		ui_Template = ui;
 
 		keyH = new KeyHandler(this);
@@ -106,10 +109,12 @@ public class Game {
 
 	}
 
+	
 	// RESET GAME
 	public void resetGame() {
 		score = 10;
 		player.staringPosition();
+		player.setDefaultValues();
 		player.inventory = new Entity[4];
 		aSetter.setObject();
 		aSetter.setMonster();
@@ -120,7 +125,6 @@ public class Game {
 		score = 10;
 		aSetter.setObject();
 		aSetter.setMonster();
-
 		music.playMusic(0);
 	}
 
@@ -166,6 +170,8 @@ public class Game {
 			ui_Template = ui_Win;
 		if (state == playerSelectState)
 			ui_Template = ui_PlayerSelect;
+		if (state == lostState)
+		    ui_Template = ui_Lost;
 
 	}
 
@@ -221,4 +227,5 @@ public class Game {
 	public int getFPS() {
 		return this.fps;
 	}
+
 }

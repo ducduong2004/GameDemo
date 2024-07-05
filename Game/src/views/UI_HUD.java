@@ -17,11 +17,13 @@ public class UI_HUD implements UI_Template {
 		this.gp = gp;
 	}
 
+
+	// DRAW SCORE
 	@Override
 	public void draw(Graphics2D g2) {
 
 		String text = "Task:\n Cleaning the room?";
-		int x = gp.screenWidth - gp.tileSize * 3;
+		int x = gp.screenWidth - gp.tileSize * 4;
 		int y = gp.screenHeight * 1 / 12;
 
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
@@ -29,7 +31,7 @@ public class UI_HUD implements UI_Template {
 		g2.setColor(Color.white);
 		g2.drawString(text, x, y);
 
-		String score = gp.score + "/";
+		String score = gp.score + "/30";
 
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
 

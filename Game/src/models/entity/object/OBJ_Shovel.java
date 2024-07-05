@@ -19,7 +19,7 @@ public class OBJ_Shovel extends Entity{
 		setImage(1, "/objects/shovel", 1);
 		collisionOn = false;
 		setUsable(true);
-
+		
 		solidArea.x = 0;
 		solidArea.y = 0;
 
@@ -32,40 +32,18 @@ public class OBJ_Shovel extends Entity{
 	}
 
 	public void setAction() {
-		actionLock++;
-
 		
-
 		if(gp.keyH.enterPressed && gp.player.getInventory(gp.player.slot) != null && gp.player.getInventory(gp.player.slot).equals(this)){
 			gp.player.usingItem = true;
 			attack(); 
 			gp.keyH.enterPressed = false;
 			gp.player.usingItem = false;
 		}
-		
-
 	}
+
 
 	
-	private void checkEntity() {
-		// CHECK FOR COLLISION WITH Entity
-		int monster_index = gp.collisionChecker.checkEntity(this, gp.monster);
-		System.out.println(monster_index);
-		if(monster_index > -1) {
-			Entity monster = gp.monster[monster_index];
-			if(monster.type == gp.player.type_monster){
-				monster.health--;
-			}
 
-			if(monster.health < 0) {
-				gp.monster[monster_index] = null;
-			}
-        }
-
-		
-
-
-	}
 
 	private void attack() {
 		switch (gp.player.direction) {
@@ -94,5 +72,22 @@ public class OBJ_Shovel extends Entity{
 
 		}
 
+	}
+
+
+	private void checkEntity() {
+		// CHECK FOR COLLISION WITH Entity
+		int monster_index = gp.collisionChecker.checkEntity(this, gp.monster);
+		System.out.println(monster_index);
+		if(monster_index > -1) {
+			Entity monster = gp.monster[monster_index];
+			if(monster.type == gp.player.type_monster){
+				monster.health--;
+			}
+
+			if(monster.health < 0) {
+				gp.monster[monster_index] = null;
+			}
+        }
 	}
 }

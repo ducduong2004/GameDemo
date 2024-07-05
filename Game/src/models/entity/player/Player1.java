@@ -1,6 +1,6 @@
 package models.entity.player;
 
-import controller.input.KeyHandler;
+import event.KeyHandler;
 import models.Game;
 import models.entity.skill.HealingSkillBehavior;
 

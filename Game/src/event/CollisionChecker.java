@@ -1,5 +1,6 @@
-package models;
+package event;
 
+import models.Game;
 import models.entity.Entity;
 import models.entity.player.Player;
 

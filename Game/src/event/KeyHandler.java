@@ -1,4 +1,4 @@
-package controller.input;
+package event;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -80,7 +80,14 @@ public class KeyHandler implements KeyListener {
 			playState(code);
 		}
 
+		// LOST STATE
+		else if (gp.gameState == gp.lostState) {
+			lostState(code);
+		}
+
 	}
+
+	
 
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -106,6 +113,7 @@ public class KeyHandler implements KeyListener {
 			gp.ui.commandNum++;
 		if (code == KeyEvent.VK_ENTER) {
 			if (gp.ui.commandNum == 0) {
+				gp.resetGame();
 				gp.setGameState(gp.playState);
 			}
 			if (gp.ui.commandNum == 1) {
@@ -124,14 +132,32 @@ public class KeyHandler implements KeyListener {
 			gp.ui_Win.commandNum++;
 		if (code == KeyEvent.VK_ENTER) {
 			if (gp.ui_Win.commandNum == 0) {
-				gp.setGameState(gp.titleState);
 				gp.resetGame();
+				gp.setGameState(gp.titleState);
+				
+				System.out.println(gp.player.health);
 			}
 			if (gp.ui_Win.commandNum == 1) {
 				System.exit(0);
 			}
 		}
 
+	}
+
+	private void lostState(int code) {
+		if (code == KeyEvent.VK_W && gp.ui_Lost.commandNum > 0)
+			gp.ui_Lost.commandNum--;
+		if (code == KeyEvent.VK_S && gp.ui_Lost.commandNum < 1)
+			gp.ui_Lost.commandNum++;
+		if (code == KeyEvent.VK_ENTER) {
+			if (gp.ui_Lost.commandNum == 0) {
+				gp.setGameState(gp.titleState);
+				gp.resetGame();
+			}
+			if (gp.ui_Lost.commandNum == 1) {
+				System.exit(0);
+			}
+		}
 	}
 
 	public void playerSelectState(int code) {

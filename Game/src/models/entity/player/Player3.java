@@ -1,7 +1,8 @@
 package models.entity.player;
 
-import controller.input.KeyHandler;
+import event.KeyHandler;
 import models.Game;
+import models.entity.skill.LightFootSkillBehavior;
 
 public class Player3 extends Player {
 	private static Player3 instance;
@@ -9,6 +10,7 @@ public class Player3 extends Player {
 
 	private Player3(Game game, KeyHandler keyH) {
 		super(game, keyH);
+		skillBehavior = new LightFootSkillBehavior(this);
 	}
 
 	public static Player getInstance(Game game, KeyHandler keyH) {
