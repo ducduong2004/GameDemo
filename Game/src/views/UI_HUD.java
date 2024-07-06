@@ -31,7 +31,7 @@ public class UI_HUD implements UI_Template {
 		g2.setColor(Color.white);
 		g2.drawString(text, x, y);
 
-		String score = gp.score + "/30";
+		String score = gp.score + "/ 60";
 
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
 

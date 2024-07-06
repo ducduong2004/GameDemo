@@ -32,7 +32,10 @@ public class GameView extends JPanel implements Observer {
 
 	@Override
 	public void update() {
-		if (gameController.noItem())
+		if(gameController.isHalfScore()) {
+			gameController.setBrookenLight(true);
+		}
+		if (gameController.isMaxScore())
 			gameController.won();
 	}
 

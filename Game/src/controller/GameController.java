@@ -43,30 +43,8 @@ public class GameController implements Runnable {
 		}
 	}
 
-	public Game getGame() {
-		return game;
-	}
 
-	public boolean noItem() {
-		return game.score > 30;
-	}
-
-	public void setGameView(GameView gameView) {
-		this.gameView = gameView;
-	}
-
-	public void addObserver() {
-		game.addObserver(gameView);
-	}
-
-	public void won() {
-		game.setGameState(game.winTitleState);
-	}
-
-	public void start() {
-		game.setGameState(game.titleState);
-	}
-
+	// GETTER AND SETTER
 	public int getScreenWidth() {
 		return game.getScreenWidth();
 	}
@@ -79,12 +57,41 @@ public class GameController implements Runnable {
 		return game.keyH;
 	}
 
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGameView(GameView gameView) {
+		this.gameView = gameView;
+	}
+
+	public void addObserver() {
+		game.addObserver(gameView);
+	}
+
+	//CHECK IF THE SCORE IS MAX
+	public boolean isMaxScore() {
+		return game.score > 60;
+	}
+
+	//CHECK IF THE SCORE IS HALF 
+	public boolean isHalfScore() {
+		return game.getScore() == 30;
+	}
+	
+	// SET GAMESTATE TO WIN_STATE
+	public void won() {
+		game.setGameState(game.winTitleState);
+	}
+
+	// TURN ON BROOKEN LIGHT
+	public void setBrookenLight(boolean b) {
+		game.setBrookenLight(b);
+	}
+
+	// PAINT THE GRAPHICS
 	public void paintPlayComponent(Graphics2D g2) {
 		game.paintPlayComponent(g2);
 	}
-	
-	
-	
-	
 
 }

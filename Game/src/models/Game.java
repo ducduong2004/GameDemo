@@ -8,13 +8,13 @@ import event.CollisionChecker;
 import event.KeyHandler;
 import models.entity.Entity;
 import models.entity.player.Player;
-import models.entity.player.Player1;
 import models.entity.player.SimpleCharacterFactory;
 import models.sound.Sound;
 import models.tile.TileManager;
 import views.UI;
 import views.UI_HUD;
 import views.UI_ItemInfo;
+import views.UI_LightOff;
 import views.UI_Lost;
 import views.UI_OptionState;
 import views.UI_PlayState;
@@ -42,7 +42,7 @@ public class Game {
 	public final int maxWorldCol = 82;
 	public final int maxWorldRow = 83;
 
-	// MAP
+	// MAP ( for making more map if needed )
 	public final int maxMap = 10;
 	public int currentMap = 0;
 
@@ -59,7 +59,7 @@ public class Game {
 	public final int optionState = 5;
 	public final int lostState = 6;
 
-	// SYSTEM
+	// GAME UI
 	public UI_Template ui_Template;
 	public UI ui;
 	public UI_Win ui_Win;
@@ -69,7 +69,9 @@ public class Game {
 	public UI_HUD ui_HUD;
 	public UI_OptionState ui_OptionState;
 	public UI_Lost ui_Lost;
+	public UI_LightOff ui_LightOff;
 
+	// SYSTEM
 	public KeyHandler keyH;
 	public Player player;
 	public TileManager tileM = new TileManager(this);
@@ -91,7 +93,15 @@ public class Game {
 	public final int playerType_02 = 2;
 	public final int playerType_03 = 3;
 
+	//ENVIROMENT
+	private int circleLightSize = 300;
+	private boolean brookenLight;
+
 	public Game() {
+
+		keyH = new KeyHandler(this);
+		player = factory.createPlayer(playerType, this, keyH);
+		
 		observers = new ArrayList<>();
 		ui = new UI(this);
 		ui_Win = new UI_Win(this);
@@ -102,9 +112,8 @@ public class Game {
 		ui_OptionState = new UI_OptionState(this);
 		ui_Lost = new UI_Lost(this);
 		ui_Template = ui;
-
-		keyH = new KeyHandler(this);
-		player = factory.createPlayer(playerType, this, keyH);
+		ui_LightOff = new views.UI_LightOff(this,circleLightSize);
+		
 		gameSetup();
 
 	}
@@ -113,6 +122,7 @@ public class Game {
 	// RESET GAME
 	public void resetGame() {
 		score = 10;
+		brookenLight = false;
 		player.staringPosition();
 		player.setDefaultValues();
 		player.inventory = new Entity[4];
@@ -121,6 +131,7 @@ public class Game {
 
 	}
 
+	// SETUP BEFORE CREATE GAME
 	public void gameSetup() {
 		score = 10;
 		aSetter.setObject();
@@ -129,7 +140,7 @@ public class Game {
 	}
 
 	public void update() {
-		// System.out.println(gameState);
+		// System.out.println("game state is " + gameState);
 
 		if (gameState == titleState) {
 			return;
@@ -158,6 +169,8 @@ public class Game {
 		g2.dispose();
 	}
 
+
+	// SETTING GAMESTATE
 	public void setGameState(int state) {
 		this.gameState = state;
 		if (state == playState)
@@ -175,7 +188,7 @@ public class Game {
 
 	}
 
-	// OBSERVER PATTERN
+	// Score OBSERVER PATTERN
 	public void addObserver(Observer o) {
 		observers.add(o);
 	}
@@ -186,6 +199,12 @@ public class Game {
 		}
 	}
 
+	public void inScore() {
+		setScore(score + 10);
+	}
+
+	// GETTERS AND SETTERS
+
 	public int getScore() {
 		return score;
 	}
@@ -195,11 +214,6 @@ public class Game {
 		notifyObserver();
 	}
 
-	public void inScore() {
-		setScore(score + 10);
-	}
-
-	// GETTERS AND SETTERS
 	public Player getPlayer() {
 		return player;
 	}
@@ -226,6 +240,16 @@ public class Game {
 
 	public int getFPS() {
 		return this.fps;
+	}
+
+
+	//FOR BROOKEN LIGHT
+	public void setBrookenLight(boolean b) {
+		brookenLight = b;
+	}
+
+	public boolean getBrookenLight() {
+		return brookenLight;
 	}
 
 }

@@ -31,18 +31,19 @@ public class UI_ItemInfo implements UI_Template {
 	}
 
 	private void drawTitleScreen(int i) {
+		// check if item is null or not
+		if(gp.obj[i] == null)
+		return;
 
-		// TITLE NAME
 
+		// ITEM INFO
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 12F));
+
 		String text = gp.obj[i].info;
 		int x = gp.tileSize / 2;
 		int y = gp.tileSize / 2;
 		int textLenght = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth(); // Gets width of text.
 		int textHeight = (int) g2.getFontMetrics().getStringBounds(text, g2).getHeight(); // Gets height of text.
-
-//		g2.setColor(new Color(0, 0, 0)); // FILL BACKGROUND BLACK
-//		g2.fillRect(gp.tileSize - 3, gp.tileSize - textHeight, textLenght + 5, textHeight + 5);
 
 		// SHADOW
 		g2.setColor(Color.darkGray);

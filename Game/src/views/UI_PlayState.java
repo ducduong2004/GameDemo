@@ -16,7 +16,7 @@ public class UI_PlayState implements UI_Template {
 	@Override
 	public void draw(Graphics2D g2) {
 		// DRAW IN THE EXACT PRIORITY
-		// Map -> player -> object -> monster
+		// Map -> player -> object -> monster -> light -> HUD
 
 		// DRAW TILEMAP
 		gp.tileM.draw(g2);
@@ -37,6 +37,12 @@ public class UI_PlayState implements UI_Template {
 			}
 		}
 
+		// DRAW LIGHT
+		if(gp.getBrookenLight()) {
+			gp.ui_LightOff.draw(g2);
+		}
+
+		// SHOW OBJECT INFOMATION
 		if (gp.collisionChecker.checkObject(gp.player, true) != -1) {
 			gp.ui_info.draw(g2);
 		}
@@ -47,6 +53,7 @@ public class UI_PlayState implements UI_Template {
 		if (gp.gameState == gp.optionState) {
 			gp.ui_OptionState.draw(g2);
 		}
+		
 
 	}
 
