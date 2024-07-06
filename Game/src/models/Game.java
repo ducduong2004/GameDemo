@@ -23,6 +23,20 @@ import views.UI_Template;
 import views.UI_Win;
 
 public class Game {
+	public enum GameState {
+        PLAYING, WON, LOST
+    }
+
+    private GameState gameState1;
+   
+
+    public GameState getGameState() {
+        return gameState1;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState1 = gameState;
+    }
 
 	List<Observer> observers;
 

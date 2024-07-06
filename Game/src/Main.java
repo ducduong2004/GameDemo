@@ -48,7 +48,7 @@ public class Main {
 		System.out.println("Present Project Directory : " + System.getProperty("user.dir"));
 
 		List<Main> windows = new LinkedList<>();
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 2; i++) {
 			windows.add(new Main());
 		}
 	}
