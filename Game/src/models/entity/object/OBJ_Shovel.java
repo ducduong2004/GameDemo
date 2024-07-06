@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 
 import models.Game;
 import models.entity.Entity;
+import models.entity.objbehavior.NonRecyclableTrashBehavior;
 
 public class OBJ_Shovel extends OBJ{
 
@@ -12,6 +13,7 @@ public class OBJ_Shovel extends OBJ{
 
 	public OBJ_Shovel(Game gp) {
 		super(gp);
+		trashBehaviorStrategy = new NonRecyclableTrashBehavior();
 		name = "shovel";
 		type = type_object;
 		info = "Rusty Shovel";
