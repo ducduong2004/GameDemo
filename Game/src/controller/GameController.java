@@ -94,4 +94,8 @@ public class GameController implements Runnable {
 		game.paintPlayComponent(g2);
 	}
 
+	
+	
+
+
 }

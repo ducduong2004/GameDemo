@@ -3,7 +3,7 @@ package models.entity.object;
 import models.Game;
 import models.entity.Entity;
 
-public class OBJ_Bottle extends Entity {
+public class OBJ_Bottle extends OBJ {
 
 	public OBJ_Bottle(Game gp) {
 		super(gp);
@@ -16,9 +16,5 @@ public class OBJ_Bottle extends Entity {
 		setUsable(false);
 	}
 
-	@Override
-	public void setAction() {
-		super.setAction();
-	}
 
 }
