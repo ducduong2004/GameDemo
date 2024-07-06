@@ -5,19 +5,30 @@ import java.util.Random;
 
 import models.Game;
 import models.entity.Entity;
+import models.entity.skill.SkillBehavior;
 
 public abstract class Monster extends Entity{
+	
 	private int actionLock = 0;
 	public BufferedImage left1, left2, right1, right2;
 	BufferedImage currentImage = right1;
+	public int timeHeal = 0;
+
+	private SkillBehavior autoHealBehavior;
+	private SkillBehavior speedupBehavior;
 
     public Monster(Game gp2) {
         super(gp2);
-        
+        this.autoHealBehavior = new MonsterHealingBehavior(this);
+		this.speedupBehavior = new MonsterSpeedUp(this);
     }
     @Override
     public void update() {
 		setAction();
+		autoHealBehavior.useSkill();
+		if(this instanceof MON_Spider){
+			speedupBehavior.useSkill();
+		}
 		collisionOn = false;
 		gp.collisionChecker.checkTile(this);
 		gp.collisionChecker.checkObject(this, false);
@@ -33,6 +44,7 @@ public abstract class Monster extends Entity{
 			if (direction == "right")
 				worldX += speed;
 		}
+		
     }
     @Override
     public void setAction() {

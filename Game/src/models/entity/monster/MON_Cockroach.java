@@ -5,17 +5,30 @@ import java.util.Random;
 
 import models.Game;
 import models.entity.Entity;
+import models.entity.skill.HealingSkillBehavior;
+import models.entity.skill.SkillBehavior;
+
+
 
 public class MON_Cockroach extends Monster {
 
+	SkillBehavior skillBehavior;
+
+
 	public MON_Cockroach(Game gp2) {
 		super(gp2);
+		this.skillBehavior = new MonsterHealingBehavior(this) ;
 
+		
+
+		//INIT
 		name = "Giant Cockroach";
 		type = type_monster;
 		speed = 1;
 		direction = "right";
-		health = 6;
+		maxHealth = 6;
+
+		health = maxHealth;
 
 		solidArea.x = 12;
 		solidArea.y = 28;

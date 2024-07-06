@@ -12,10 +12,6 @@ import javax.imageio.ImageIO;
 import event.KeyHandler;
 import models.Game;
 import models.entity.Entity;
-import models.entity.objbehavior.NonRecyclableTrashBehavior;
-import models.entity.objbehavior.RecyclableTrashBehavior;
-import models.entity.objbehavior.TrashBehaviorStrategy;
-import models.entity.object.OBJ;
 import models.entity.object.OBJ_Bottle;
 import models.entity.skill.SkillBehavior;
 import models.sound.Sound;
@@ -122,13 +118,13 @@ public abstract class Player extends Entity {
 		if (keyH.interaction) {
 //			System.out.println("Key interaction detected"); // Debugging statement
 			if (gp.collisionChecker.onBin(this) && inventory[slot] != null && inventory[slot].type == type_object) {
-				// System.out.println("Collision with bin detected"); // Debugging statement
+				System.out.println("Collision with bin detected"); // Debugging statement
 				for (int i = 0; i < gp.obj.length; i++) {
 					if (gp.obj[i] != null && gp.obj[i].equals(inventory[slot])) {
 						gp.obj[i] = null;
 						inventory[slot] = null;
 						gp.inScore();
-						// System.out.println("Object removed from hand and score incremented"); // Debugging statement
+						System.out.println("Object removed from hand and score incremented"); // Debugging statement
 
 						gp.sfx.playSFX(3);
 						break;
@@ -183,8 +179,6 @@ public abstract class Player extends Entity {
 
 		}
 
-
-		// INVINCIBLE COUNTER
 		if (invincible == true) {
 			invincibleCounter++;
 			if (invincibleCounter > 60) {
@@ -195,8 +189,6 @@ public abstract class Player extends Entity {
 
 	}
 
-	// IF PLAYER CONTACT MONSTER THEN INVINCIBLE = TRUE
-	// AVOID BEING DAMAGE REPEATLY ( INSTANCE DEATH )
 	public void contactMonster(int monsterIndex) {
 		if (monsterIndex != -1) {
 			if (invincible == false) {
@@ -208,7 +200,7 @@ public abstract class Player extends Entity {
 	}
 
 	
-	// CHECK IF PLAYER IS USING ITEM
+
 	private boolean usingitem() {
 		return usingItem;
 	}
@@ -222,11 +214,9 @@ public abstract class Player extends Entity {
 			// fill up the empty hand
 			if (inventory[slot] == null) {
 				System.out.println("pick");
-				
+
 				inventory[slot] = gp.obj[objIndex];
 				canInteract = false;
-
-				performStrashBehavior( ( OBJ ) inventory[slot]);
 				startCooldownTimer();
 
 				gp.sfx.playSFX(1);
@@ -242,18 +232,6 @@ public abstract class Player extends Entity {
 				gp.sfx.playSFX(1);
 			}
 			return;
-		}
-	}
-
-	// PERFORM THE TRASH BEHAVIOR
-	private void performStrashBehavior(OBJ pickedTrash) {
-		TrashBehaviorStrategy behaviorStrategy = pickedTrash.getTrashBehavior();
-		if (behaviorStrategy instanceof NonRecyclableTrashBehavior) {
-			behaviorStrategy.performAction(pickedTrash);
-		} else if (behaviorStrategy instanceof RecyclableTrashBehavior) {
-		    	behaviorStrategy.performAction(pickedTrash);
-		} else {
-			System.out.println("Picked up Trash of unknown type: " + pickedTrash.type);
 		}
 	}
 
