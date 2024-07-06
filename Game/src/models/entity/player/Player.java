@@ -12,9 +12,7 @@ import javax.imageio.ImageIO;
 import event.KeyHandler;
 import models.Game;
 import models.entity.Entity;
-import models.entity.object.OBJ_Bottle;
 import models.entity.skill.SkillBehavior;
-import models.sound.Sound;
 import utils.UtilityTool;
 
 public abstract class Player extends Entity {
