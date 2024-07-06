@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import models.Game;
 import models.entity.Entity;
 
-public class OBJ_Shovel extends Entity{
+public class OBJ_Shovel extends OBJ{
 
 	private final int attackRange = 50;
 	private int actionLock = 0;

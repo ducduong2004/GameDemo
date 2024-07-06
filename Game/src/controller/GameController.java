@@ -82,6 +82,11 @@ public class GameController implements Runnable {
 	public void paintPlayComponent(Graphics2D g2) {
 		game.paintPlayComponent(g2);
 	}
+
+    public void update(int musicVol, int sfxVol) {
+		game.music.volumeScale  = musicVol;
+		game.sfx.volumeScale  = sfxVol;
+    }
 	
 	
 	
