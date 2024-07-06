@@ -2,6 +2,7 @@ package models;
 
 import models.entity.object.OBJ_Shovel;
 import models.entity.monster.MON_Cockroach;
+import models.entity.monster.MON_Spider;
 import models.entity.object.OBJ_Bottle;
 
 public class AssetSetter {
@@ -43,9 +44,9 @@ public class AssetSetter {
 		gp.monster[0] = new MON_Cockroach(gp);
 		gp.monster[1] = new MON_Cockroach(gp);
 		gp.monster[2] = new MON_Cockroach(gp);
-		gp.monster[3] = new MON_Cockroach(gp);
-		gp.monster[4] = new MON_Cockroach(gp);
-		gp.monster[5] = new MON_Cockroach(gp);
+		gp.monster[3] = new MON_Spider(gp);
+		gp.monster[4] = new MON_Spider(gp);
+		gp.monster[5] = new MON_Spider(gp);
 
 		gp.monster[0].setPosition(5,8);
 		gp.monster[1].setPosition(9,9);
@@ -53,6 +54,8 @@ public class AssetSetter {
 		gp.monster[3].setPosition(10,10);
 		gp.monster[4].setPosition(60,80);
 		gp.monster[5].setPosition(50,3);
+
+
 
 
 	}
